@@ -35,7 +35,7 @@ public class PetService {
         }
         AppUser user = appUserRepository.findByEmail(userEmail)
                 .orElseThrow(AccountNotFoundException::new);
-
+    
         Pet pet = new Pet(input.getName(), imageURL, input.getSpecies(), input.getBreed(), input.getSex());
         pet.setOwner(user);
         petRepository.save(pet);

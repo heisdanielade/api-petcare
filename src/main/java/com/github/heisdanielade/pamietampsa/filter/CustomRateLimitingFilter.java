@@ -29,7 +29,7 @@ public class CustomRateLimitingFilter implements Filter {
 
 
     private Bucket resolveBucket(String ip, String path) {
-        String key = ip + ":" + path;
+        String key = ip + '+' + path;
         Bandwidth limit = RATE_LIMITS.getOrDefault(path,
                 Bandwidth.classic(5, Refill.greedy(5, Duration.ofMinutes(1))));
         return cache.computeIfAbsent(key, k -> Bucket.builder().addLimit(limit).build());
